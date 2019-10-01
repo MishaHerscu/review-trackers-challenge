@@ -1,9 +1,5 @@
 require_relative 'reviews_getter'
 
-# uri = URI.parse('https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085&requestmode=reviews,stats,ratingconfig,propertyconfig&page=0&sortby=reviewsubmitted&sortorder=desc&pagesize=10&AuthorLocation=All&_t=1569899172003')
-arguments = 'https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085'
-# arguments = 'https://www.lendingtree.com/content/mu-plugins/lt-revi/review-api-proxy.php?RequestType=&productType=&brandId=27085'
-
 def checks(*args)
   return 'bad request: exactly one arg required' if args.count != 1
   url_beginning = 'https://www.lendingtree.com/'
@@ -19,5 +15,3 @@ def main_function(*args)
     return request_type
   end
 end
-
-main_function(arguments)
