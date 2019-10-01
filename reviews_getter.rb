@@ -27,6 +27,6 @@ def reviews_getter(arg_uri)
 
     return reviews_to_return
   rescue
-    return 'bad request'
+    return 'bad request"\n"'
   end
 end

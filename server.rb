@@ -7,6 +7,7 @@
 # In the first just run 'ruby server.rb'
 # In the second run this command with any desired url, I have an example below:
 # curl -X POST 'http://localhost:2345/' -H 'Content-Type: application/json' -d { 'url': 'https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085' }
+# curl -d 'url=https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085' http://localhost:2345/
 
 # Note, the original testing curl request from the source had this: curl --verbose -XGET http://localhost:2345/anything
 
