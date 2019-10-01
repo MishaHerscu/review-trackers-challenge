@@ -1,39 +1,25 @@
-# Source: https://practicingruby.com/articles/implementing-an-http-file-server
-# Notes:
-# I used this source for a simple http server to host the main function for the coding challenge.
-# This is therefore mostly not my work.
+# example request:
+# curl -X POST http://localhost:2345/ -d 'url=https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085'
 
-# You can test this with two terminal windows:
-# In the first just run 'ruby server.rb'
-# In the second run this command with any desired url, I have an example below:
-# curl -X POST 'http://localhost:2345/' -H 'Content-Type: application/json' -d { 'url': 'https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085' }
-# curl -d 'url=https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085' http://localhost:2345/
+require 'socket'
 
-# Note, the original testing curl request from the source had this: curl --verbose -XGET http://localhost:2345/anything
-
-require 'socket' # Provides TCPServer and TCPSocket classes
 require_relative 'main_function'
 
-# Initialize a TCPServer object that will listen
-# on localhost:2345 for incoming connections.
 server = TCPServer.new('localhost', 2345)
 
-# loop infinitely, processing one incoming
-# connection at a time.
 loop do
 
-  # Wait until a client connects, then return a TCPSocket
-  # that can be used in a similar fashion to other Ruby
-  # I/O objects. (In fact, TCPSocket is a subclass of IO.)
   socket = server.accept
+  data = socket.recv(2000).split("\n")
 
-  # Read the first line of the request (the Request-Line)
-  request = socket.gets
+  # parse out URL
+  request_url = data.last.split('=')[1]
+
+  # run code to get data
+  response = main_function(request_url)
 
   # Log the request to the console for debugging
-  STDERR.puts request
-
-  response = main_function(request)
+  STDERR.puts response
 
   # We need to include the Content-Type and Content-Length headers
   # to let the client know the size and type of data
