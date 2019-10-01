@@ -2,7 +2,6 @@ require "net/http"
 require "uri"
 require "json"
 require_relative 'review'
-require_relative 'constants'
 
 def reviews_getter(arg_uri)
   begin
@@ -27,6 +26,6 @@ def reviews_getter(arg_uri)
 
     return reviews_to_return
   rescue
-    return 'bad request"\n"'
+    return 'bad request'
   end
 end
