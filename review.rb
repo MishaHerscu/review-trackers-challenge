@@ -13,7 +13,7 @@ class Review
       :title => hash['title'],
       :text => hash['text'],
       :lastModificationDateTime => hash['lastModificationDateTime'],
-      :primaryRating => hash['primaryRating']['value']
+      :primaryRating => hash['primaryRating']['value'] if hash['primaryRating']
     },
 
     # secondary info
