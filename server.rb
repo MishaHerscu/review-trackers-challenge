@@ -16,7 +16,7 @@ loop do
   request_url = request.last.split('url=')[1]
 
   # run code to get data
-  response = main_function(request_url) + "\r\n"
+  response = main_function(request_url).to_s + "\r\n"
 
   STDERR.puts request
 

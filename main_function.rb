@@ -10,7 +10,7 @@ end
 def main_function(*args)
   request_type = checks(*args)
   if request_type == 'good request start'
-    p reviews_getter(args[0])
+    return reviews_getter(args[0])
   else
     return request_type
   end
