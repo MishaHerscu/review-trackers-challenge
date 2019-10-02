@@ -13,7 +13,7 @@ loop do
   request = socket.recv(2000).split("\n")
 
   # parse out URL
-  request_url = request.last.split('=')[1]
+  request_url = request.last.split('url=')[1]
 
   # run code to get data
   response = main_function(request_url) + "\r\n"
