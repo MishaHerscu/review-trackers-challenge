@@ -11,6 +11,14 @@
 7. No need to make a view and datastore is optional
 8. Error/bad request handling should be built out
 
-## Example Request
+## Turn On Server
 
-```curl -X POST http://localhost:2345/ -d 'url=https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085'```
+`ruby server.rb`
+
+## Example Request To Test API
+
+`curl -X POST http://localhost:2345/ -d 'url=https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085'`
+
+## Run Tests With
+
+`ruby tests.rb`
