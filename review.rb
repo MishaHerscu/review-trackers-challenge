@@ -13,7 +13,7 @@ class Review
       :title => hash['title'],
       :text => hash['text'],
       :lastModificationDateTime => hash['lastModificationDateTime'],
-      :primaryRating => hash['primaryRating']
+      :primaryRating => hash['primaryRating']['value']
     },
 
     # secondary info
@@ -53,6 +53,18 @@ class Review
       :id => hash['id']
     }
 
+  end
+
+  def uri
+    @uri
+  end
+
+  def primary_info
+    @primary_info
+  end
+
+  def secondary_info
+    @secondary_info
   end
 
   def valid
