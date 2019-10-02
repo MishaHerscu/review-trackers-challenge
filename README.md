@@ -17,7 +17,7 @@
 
 ## Example Request To Test API
 
-`curl -X POST http://localhost:2345/ -d 'url=https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085'`
+`curl -X POST http://localhost:2345/ -d 'url=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183'`
 
 ## Run Tests With
 

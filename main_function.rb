@@ -1,4 +1,5 @@
 require_relative 'reviews_getter'
+require_relative 'url_getter'
 
 def checks(*args)
   return 'bad request: exactly one arg required"\n"' if args.count != 1
@@ -15,7 +16,7 @@ def format_response(reviews)
   return formatted_response
 end
 
-def main_function(*args)
+def request_reviews(*args)
   request_type = checks(*args)
   if request_type == 'good request start'
     review_data = reviews_getter(args[0])
@@ -26,5 +27,15 @@ def main_function(*args)
     end
   else
     return request_type
+  end
+end
+
+def main_function(request_url)
+  final_url = url_getter(request_url)
+  p 'final_url: ', final_url
+  if final_url
+    request_reviews(final_url)
+  else
+    return 'bad request for: ' + url
   end
 end
