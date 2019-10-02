@@ -7,8 +7,8 @@ require_relative 'test_cases'
 review_tests.each do |test|
   test_result = test[:data].send(test[:test_method]) == test[:result]
   if test_result
-    p test[:label] + ' passed!'
+    puts test[:label] + ' passed!'
   else
-    p test[:label] + ' failed!'
+    puts test[:label] + ' failed!'
   end
 end
