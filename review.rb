@@ -1,4 +1,7 @@
 class Review
+
+  @@url_beginning = 'https://www.lendingtree.com/'
+
   def initialize(uri, hash)
 
     # source url
@@ -52,8 +55,10 @@ class Review
 
   end
 
-  def display
-    p self
+  def valid
+    return false if @@url_beginning != @uri[0, @@url_beginning.length]
+    return false if !@primary_info
+    return true
   end
 
   def display_primary_info

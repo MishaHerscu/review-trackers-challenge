@@ -1,6 +1,3 @@
-# example request:
-# curl -X POST http://localhost:2345/ -d 'url=https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=27085'
-
 require 'socket'
 
 require_relative 'main_function'
