@@ -18,7 +18,12 @@ end
 def main_function(*args)
   request_type = checks(*args)
   if request_type == 'good request start'
-    return format_response(reviews_getter(args[0]))
+    review_data = reviews_getter(args[0])
+    if review_data.is_a? Enumerable
+      return format_response(review_data)
+    else
+      return review_data
+    end
   else
     return request_type
   end
