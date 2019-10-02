@@ -20,8 +20,7 @@ def reviews_getter(arg_uri)
     reviews_to_return = []
 
     hashed_data[:reviews].each do |hash|
-      review = Review.new(uri, hash)
-      reviews_to_return << review
+      reviews_to_return << Review.new(uri, hash)
     end
 
     return reviews_to_return

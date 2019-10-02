@@ -7,10 +7,18 @@ def checks(*args)
   return 'good request start'
 end
 
+def format_response(reviews)
+  formatted_response = []
+  reviews.each do |review|
+    formatted_response << review.primary_info
+  end
+  return formatted_response
+end
+
 def main_function(*args)
   request_type = checks(*args)
   if request_type == 'good request start'
-    return reviews_getter(args[0])
+    return format_response(reviews_getter(args[0]))
   else
     return request_type
   end
