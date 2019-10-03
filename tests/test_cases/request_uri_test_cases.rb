@@ -11,6 +11,7 @@ end
 def request_uri_test_cases
   {
     :label => 'RequestUri CLASS TESTS',
+    :type => 'class',
     :test_cases => [
       {
         :data => generate_uri_test_data(''),
