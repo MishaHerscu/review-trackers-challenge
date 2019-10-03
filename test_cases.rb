@@ -7,22 +7,22 @@ require_relative 'main_function'
 def review_tests
   return [
     {
-      :data => Review.new('test_url', {}),
+      :data => Review.new('test_uri', {}),
       :test_method => 'valid',
       :result => false,
-      :label => 'testing incorrect url and no hash'
+      :label => 'testing incorrect uri and no hash'
     },
     {
-      :data => Review.new('test_url', { :authorName => 'Mike' }),
+      :data => Review.new('test_uri', { :authorName => 'Mike' }),
       :test_method => 'valid',
       :result => false,
-      :label => 'testing incorrect url with hash'
+      :label => 'testing incorrect uri with hash'
     },
     {
       :data => Review.new('https://www.lendingtree.com/', { :authorName => 'Mike' }),
       :test_method => 'valid',
       :result => true,
-      :label => 'testing correct url and hash'
+      :label => 'testing correct uri and hash'
     }
   ]
 end

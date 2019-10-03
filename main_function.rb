@@ -1,10 +1,11 @@
 require_relative 'reviews_getter'
-require_relative 'url_getter'
+require_relative 'uri_getter'
+require_relative 'request_uri'
 
 def checks(*args)
   return 'bad request: exactly one arg required"\n"' if args.count != 1
-  url_beginning = 'https://www.lendingtree.com/'
-  return 'bad request: url must start with "' + url_beginning + '"' + "\n" if args[0][0, url_beginning.length] != url_beginning
+  uri_beginning = 'https://www.lendingtree.com/'
+  return 'bad request: uri must start with "' + uri_beginning + '"' + "\n" if args[0][0, uri_beginning.length] != uri_beginning
   return 'good request start'
 end
 
@@ -30,12 +31,15 @@ def request_reviews(*args)
   end
 end
 
-def main_function(request_url)
-  final_url = url_getter(request_url)
-  p 'final_url: ', final_url
-  if final_url
-    request_reviews(final_url)
+def main_function(request_uri)
+  current_request_uri = RequestUri.new(request_uri)
+  return current_request_uri.error_message unless current_request_uri.valid?
+
+  final_uri = uri_getter(request_uri)
+  p 'final_uri: ', final_uri
+  if final_uri
+    request_reviews(final_uri)
   else
-    return 'bad request for: ' + url
+    return 'bad request for: ' + request_uri
   end
 end

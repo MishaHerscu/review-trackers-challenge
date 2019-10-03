@@ -9,11 +9,11 @@ loop do
   socket = server.accept
   request = socket.recv(2000).split("\n")
 
-  # parse out URL
-  request_url = request.last.split('url=')[1]
+  # parse out URI
+  request_uri = request.last.split('uri=')[1]
 
   # run code to get data
-  response = main_function(request_url).to_s + "\r\n"
+  response = main_function(request_uri).to_s + "\r\n"
 
   STDERR.puts request
 
