@@ -5,7 +5,6 @@ require_relative '../../main_function'
 
 def test_server(test)
   uri = URI.parse(test[:uri])
-  request_data = test[:data] if test[:data]
 
   if test[:http_method] == 'GET'
     begin
@@ -35,11 +34,8 @@ def test_server(test)
     return false
   end
 
-  if test[:data]
-    request.body = request_data.to_json
-  end
-
   begin
+    request.body = test[:data] if test[:data]
     response = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(request)
     end
