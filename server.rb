@@ -1,23 +1,19 @@
 require 'socket'
 
-require_relative 'main_function'
+require_relative 'classes/request'
 
 server = TCPServer.new('localhost', 2345)
+
+def request_valid?(request)
+
+end
 
 loop do
 
   socket = server.accept
   request = socket.recv(2000).split("\n")
-
-  # parse out URI
-  request_uri = request.last.split('uri=')[1]
-
-  # run code to get reviews data
-  if request.first.split(' ')[0] == 'POST'
-    response = main_function(request_uri).to_s + "\r\n"
-  else
-    response = 'bad request: server only accepts POST requests'
-  end
+  request_obj = Request.new(request)
+  response = request_obj.results
 
   STDERR.puts request
 
