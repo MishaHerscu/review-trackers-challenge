@@ -3,14 +3,12 @@
 # To color terminal output
 require 'colorize'
 
-# Imported for API tests
-require_relative '../classes/review'
-
 # Import test sections
 require_relative 'test_cases/request_uri_test_cases'
 require_relative 'test_cases/review_test_cases'
 require_relative 'test_cases/reviews_request_test_cases'
 require_relative 'test_cases/api_test_cases'
+require_relative 'test_cases/server_test_cases'
 
 # Functions for running through test sections
 def run_tests(test_section, section_iter)
@@ -20,9 +18,9 @@ def run_tests(test_section, section_iter)
   test_section[:test_cases].each do |test|
     test_iter += 1
     if test_section[:type] == 'api'
-      api_data = main_function(test[:data])
-      potential_review = Review.new(test[:data], api_data[0])
-      result = api_data[0].class == Hash && potential_review.valid?
+      result = test_api(test)
+    elsif test_section[:type] == 'server'
+      result = test_server(test)
     else
       result = test[:data].send(test[:test_method])
     end
@@ -44,7 +42,8 @@ def run_all_tests
     request_uri_test_cases,
     review_test_cases,
     reviews_request_test_cases,
-    api_test_cases
+    api_test_cases,
+    server_test_cases
   ]
 
   # Actually run tests and print out results
