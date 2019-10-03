@@ -5,7 +5,7 @@ require_relative '../../main_function'
 # Test review.rb
 def reviews_request_test_cases
   {
-    :label => '_____ ReviewsRequest CLASS TESTS _____',
+    :label => 'ReviewsRequest CLASS TESTS',
     :test_cases => [
       {
         :data => Review.new('test_uri', {}),

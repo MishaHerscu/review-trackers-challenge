@@ -10,7 +10,7 @@ require_relative 'test_cases/api_test_cases'
 
 # function for running tests
 def run_tests(test_cases)
-  puts test_cases[:label]
+  puts '_____ ' + test_cases[:label] + ' _____'
   test_cases[:test_cases].each do |test|
     test_result = test[:data].send(test[:test_method]) == test[:result]
     if test_result
