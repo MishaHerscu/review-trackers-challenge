@@ -7,7 +7,6 @@ def generate_uri_test_data(input)
   return current_request_uri
 end
 
-# Test review.rb
 def request_uri_test_cases
   {
     :label => 'RequestUri CLASS TESTS',

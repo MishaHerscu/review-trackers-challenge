@@ -1,6 +1,5 @@
 require_relative '../../main_function'
 
-# Test review.rb
 def api_test_cases
   {
     :label => 'API TESTS',

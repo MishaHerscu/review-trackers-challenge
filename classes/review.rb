@@ -4,10 +4,8 @@ class Review
 
   def initialize(uri, hash)
 
-    # source uri
     @uri = uri
 
-    # primary info
     @primary_info = {
       :authorName => hash['authorName'],
       :title => hash['title'],
@@ -16,7 +14,7 @@ class Review
       :primaryRating => hash['primaryRating'] ? hash['primaryRating']['value'] : nil
     }
 
-    # secondary info
+    # Not returning to client in current version
     @secondary_info = {
       :authorId => hash['authorId'],
       :authorEmail => hash['authorEmail'],

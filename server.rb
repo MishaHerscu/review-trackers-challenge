@@ -12,7 +12,7 @@ loop do
   # parse out URI
   request_uri = request.last.split('uri=')[1]
 
-  # run code to get data
+  # run code to get reviews data
   response = main_function(request_uri).to_s + "\r\n"
 
   STDERR.puts request

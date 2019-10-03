@@ -1,7 +1,6 @@
 require_relative '../../classes/reviews_request'
 require_relative '../../main_function'
 
-# Test review.rb
 def reviews_request_test_cases
   {
     :label => 'ReviewsRequest CLASS TESTS',
