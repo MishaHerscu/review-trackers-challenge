@@ -1,5 +1,4 @@
 require_relative 'reviews_getter'
-require_relative 'uri_getter'
 require_relative 'request_uri'
 
 def checks(*args)
@@ -34,11 +33,8 @@ end
 def main_function(request_uri)
   current_request_uri = RequestUri.new(request_uri)
   return current_request_uri.error_message unless current_request_uri.valid?
-
-  final_uri = uri_getter(request_uri)
-  p 'final_uri: ', final_uri
-  if final_uri
-    request_reviews(final_uri)
+  if current_request_uri.final_uri
+    request_reviews(current_request_uri.final_uri)
   else
     return 'bad request for: ' + request_uri
   end
