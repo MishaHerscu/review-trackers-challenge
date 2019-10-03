@@ -1,7 +1,11 @@
 require_relative '../../main_function'
 
-def validate_api_results(data)
-  return true if data[0] == '{'
+# def validate_api_results(data)
+#   return true if data[0] == '{'
+#   return false
+# end
+
+def validate_api_results
   return false
 end
 

@@ -22,7 +22,7 @@ def run_tests(test_cases, section_iter)
       puts success_string.green
     else
       failure_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' failed!'
-      puts iter.to_s + '. ' + failure_string.red
+      puts failure_string.red
     end
   end
 end
