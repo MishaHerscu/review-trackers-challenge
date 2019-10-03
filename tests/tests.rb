@@ -1,6 +1,6 @@
 # Testing Framework
 
-# Sources to test
+# To color terminal output
 require 'colorize'
 
 # Import test sections

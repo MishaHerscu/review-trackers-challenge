@@ -1,4 +1,3 @@
-# Sources to test
 require_relative '../../classes/review'
 require_relative '../../main_function'
 
