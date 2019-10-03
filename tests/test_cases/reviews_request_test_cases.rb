@@ -1,5 +1,5 @@
 # Sources to test
-require_relative '../../classes/review'
+require_relative '../../classes/reviews_request'
 require_relative '../../main_function'
 
 # Test review.rb
@@ -8,22 +8,22 @@ def reviews_request_test_cases
     :label => 'ReviewsRequest CLASS TESTS',
     :test_cases => [
       {
-        :data => Review.new('test_uri', {}),
+        :data => ReviewsRequest.new(''),
         :test_method => 'valid?',
         :result => false,
-        :label => 'testing incorrect uri and no hash'
+        :label => 'testing no uri'
       },
       {
-        :data => Review.new('test_uri', { :authorName => 'Mike' }),
+        :data => ReviewsRequest.new('incorrect/uri'),
         :test_method => 'valid?',
         :result => false,
-        :label => 'testing incorrect uri with hash'
+        :label => 'testing incorrect uri with string'
       },
       {
-        :data => Review.new('https://www.lendingtree.com/', { :authorName => 'Mike' }),
+        :data => ReviewsRequest.new('https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId=123456789'),
         :test_method => 'valid?',
         :result => true,
-        :label => 'testing correct uri and hash'
+        :label => 'testing correct uri'
       }
     ]
   }
