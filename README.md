@@ -11,6 +11,10 @@
 7. No need to make a view and datastore is optional
 8. Error/bad request handling should be built out
 
+## Setup
+
+`bundle install`
+
 ## Turn On Server
 
 `ruby server.rb`
