@@ -6,6 +6,14 @@ require_relative '../../main_function'
 def test_server(test)
   uri = URI.parse(test[:uri])
 
+  if test[:data]
+    request_data = {}
+    test[:data].split('&').each do |data|
+      data_key_val = data.split('=')
+      request_data[data_key_val[0]] = data_key_val[1]
+    end
+  end
+
   if test[:http_method] == 'GET'
     begin
       request = Net::HTTP::Get.new(uri)
@@ -34,6 +42,10 @@ def test_server(test)
     return false
   end
 
+  if test[:data]
+    request.body = request_data.to_json
+  end
+
   begin
     response = Net::HTTP.start(uri.hostname, uri.port) do |http|
       http.request(request)
@@ -60,17 +72,41 @@ def server_test_cases
       {
         :http_method=> 'POST',
         :uri => 'incorrect/uri',
-        :data => 'xyz=123',
+        :data => nil,
         :result => false,
         :label => 'testing POST with incorrect uri and no data',
         :warning => 'warning: server must be on to run server tests!'
       },
       {
         :http_method=> 'POST',
-        :uri => 'incorrect/uri',
-        :data => nil,
+        :uri => '',
+        :data => 'xyz=123',
         :result => false,
+        :label => 'testing POST with no uri and incorrect data',
+        :warning => 'warning: server must be on to run server tests!'
+      },
+      {
+        :http_method=> 'POST',
+        :uri => 'incorrect/uri',
+        :data => 'xyz=123',
+        :result => false,
+        :label => 'testing POST with incorrect uri and incorrect data',
+        :warning => 'warning: server must be on to run server tests!'
+      },
+      {
+        :http_method=> 'POST',
+        :uri => 'http://localhost:2345/',
+        :data => nil,
+        :result => 'bad request: requests must contain single data field called "uri"' + "\r\n",
         :label => 'testing POST with correct uri and no data',
+        :warning => 'warning: server must be on to run server tests!'
+      },
+      {
+        :http_method=> 'POST',
+        :uri => 'http://localhost:2345/',
+        :data => 'xyz=123',
+        :result => 'bad request: requests must contain single data field called "uri"' + "\r\n",
+        :label => 'testing POST with correct uri and incorrect data',
         :warning => 'warning: server must be on to run server tests!'
       },
       {
