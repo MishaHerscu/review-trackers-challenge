@@ -42,7 +42,9 @@ def test_server(test)
   rescue
     return 'warning: server must be on to run server tests!'
   end
-  return response.body
+  initial_response = response.body
+  final_response = initial_response[0] != '[' ? initial_response : true
+  return final_response
 end
 
 def server_test_cases

@@ -29,10 +29,15 @@ class Request
   end
 
   def set_request_uri
-    @request_uri = @request.last.split('uri=')
+    if @request.last.include? '&'
+      @request_uri = nil
+    else
+      @request_uri = @request.last.split('uri=')
+    end
   end
 
   def valid?
+    return false unless @request_uri
     return true if @http_method == 'POST' && @request_uri.length == 2
     set_error_message
     false
@@ -41,6 +46,8 @@ class Request
   def set_error_message
     if @http_method != 'POST'
       @error_message = 'bad request: server only accepts POST requests'
+    elsif !@request_uri
+      @error_message = 'bad request: requests must contain single data field called "uri"'
     elsif @request_uri.length != 2
       @error_message = 'bad request: requests must contain single data field called "uri"'
     else
