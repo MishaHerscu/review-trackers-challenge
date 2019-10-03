@@ -21,4 +21,4 @@
 
 ## Run Tests With
 
-`ruby tests.rb`
+`ruby tests/tests.rb`

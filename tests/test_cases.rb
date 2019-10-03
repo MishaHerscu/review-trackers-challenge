@@ -1,7 +1,7 @@
 # Sources to test
-require_relative 'review'
-require_relative 'reviews_getter'
-require_relative 'main_function'
+require_relative '../classes/review'
+require_relative '../reviews_getter'
+require_relative '../main_function'
 
 # Test review.rb
 def review_tests
