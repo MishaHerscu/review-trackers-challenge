@@ -9,6 +9,7 @@ class ReviewsRequest
 
   def initialize(uri)
     @final_uri = uri
+    get_reviews
   end
 
   def final_uri

@@ -1,5 +1,5 @@
 # Sources to test
-require_relative '../../classes/review'
+require_relative '../../classes/request_uri'
 require_relative '../../main_function'
 
 # Test review.rb
@@ -8,22 +8,22 @@ def request_uri_test_cases
     :label => 'RequestUri CLASS TESTS',
     :test_cases => [
       {
-        :data => Review.new('test_uri', {}),
+        :data => RequestUri.new(''),
         :test_method => 'valid?',
         :result => false,
-        :label => 'testing incorrect uri and no hash'
+        :label => 'testing no uri'
       },
       {
-        :data => Review.new('test_uri', { :authorName => 'Mike' }),
+        :data => RequestUri.new('incorrect/uri'),
         :test_method => 'valid?',
         :result => false,
-        :label => 'testing incorrect uri with hash'
+        :label => 'testing incorrect uri with string'
       },
       {
-        :data => Review.new('https://www.lendingtree.com/', { :authorName => 'Mike' }),
+        :data => RequestUri.new('https://www.lendingtree.com/'),
         :test_method => 'valid?',
         :result => true,
-        :label => 'testing correct uri and hash'
+        :label => 'testing correct uri'
       }
     ]
   }

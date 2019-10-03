@@ -8,6 +8,7 @@ class RequestUri
 
   def initialize(request_uri)
     @request_uri = request_uri
+    get_final_uri
   end
 
   def request_uri
