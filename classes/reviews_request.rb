@@ -68,8 +68,10 @@ class ReviewsRequest
     if reviews_are_valid?
       format_reviews
       @formatted_reviews
+    elsif @reviews
+      'no valid reviews for final_uri: ' + @final_uri
     else
-      'no valid reviews for final_uri: ' + @final_uri if @reviews
+      'no reviews for final_uri: ' + @final_uri
     end
   end
 
