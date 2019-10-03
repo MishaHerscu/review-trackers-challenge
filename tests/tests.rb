@@ -11,7 +11,7 @@ require_relative 'test_cases/api_test_cases'
 # function for running tests
 def run_tests(test_cases, section_iter)
   test_iter = 0
-  puts section_iter.to_s + ' _____ ' + test_cases[:label] + ' _____'
+  puts section_iter.to_s + '. _____ ' + test_cases[:label] + ' _____'
   puts "\n"
   test_cases[:test_cases].each do |test|
     test_iter += 1
