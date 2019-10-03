@@ -10,25 +10,53 @@ def server_test_cases
     :type => 'server',
     :test_cases => [
       {
-        :url => '',
+        :method=> 'POST',
+        :uri => '',
         :data => nil,
-        :test_method => 'validate_api_results',
         :result => false,
-        :label => 'testing no uri'
+        :label => 'testing POST with no uri and no data'
       },
       {
-        :url => 'incorrect/uri',
+        :method=> 'POST',
+        :uri => 'incorrect/uri',
         :data => 'xyz=123',
-        :test_method => 'validate_api_results',
         :result => false,
-        :label => 'testing incorrect uri with string'
+        :label => 'testing POST with incorrect uri and no data'
       },
       {
-        :url => 'https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
-        :data => 'xyz=123&url=',
-        :test_method => 'validate_api_results',
+        :method=> 'POST',
+        :uri => 'http://localhost:2345/',
+        :data => 'xyz=123&uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
+        :result => false,
+        :label => 'testing POST with correct uri and too much data'
+      },
+      {
+        :method=> 'GET',
+        :uri => 'http://localhost:2345/',
+        :data => 'uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
+        :result => false,
+        :label => 'testing case with correct uri and data but GET method'
+      },
+      {
+        :method=> 'GET',
+        :uri => 'http://localhost:2345/',
+        :data => 'uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
+        :result => false,
+        :label => 'testing case with correct uri and data but PATCH method'
+      },
+      {
+        :method=> 'GET',
+        :uri => 'http://localhost:2345/',
+        :data => 'uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
+        :result => false,
+        :label => 'testing case with correct uri and data but DELETE method'
+      },
+      {
+        :method=> 'POST',
+        :uri => 'http://localhost:2345/',
+        :data => 'uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
         :result => true,
-        :label => 'testing correct uri'
+        :label => 'testing correct case: correct uri, data, and http method'
       }
     ]
   }
