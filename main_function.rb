@@ -8,7 +8,7 @@ def get_reviews(uri)
     request.get_reviews
     return request.results_or_errors
   rescue
-    return 'request reviews - bad request for: ' + uri
+    return 'get reviews - bad request for: ' + uri
   end
 end
 
