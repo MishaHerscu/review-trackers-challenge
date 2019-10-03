@@ -70,7 +70,7 @@ class Review
   def valid?
     return false if @@request_uri_root != @uri[0, @@request_uri_root.length]
     return false if !@primary_info
-    return true
+    true
   end
 
 end

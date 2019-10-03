@@ -21,11 +21,11 @@ class RequestUri
   def valid?
     return false if @@request_uri_root != @request_uri[0, @@request_uri_root.length]
     return false unless self.final_uri
-    return true
+    true
   end
 
   def error
-    return 'bad request: uri must start with "' + @@request_uri_root + '"'
+    'bad request: uri must start with "' + @@request_uri_root + '"'
   end
 
   def get_final_uri

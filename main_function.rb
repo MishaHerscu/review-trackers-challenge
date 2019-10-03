@@ -6,9 +6,9 @@ def get_reviews(uri)
     request = ReviewsRequest.new(uri)
     return request.request_error_message unless request.valid?
     request.get_reviews
-    return request.results_or_errors
+    request.results_or_errors
   rescue
-    return 'get reviews - bad request for: ' + uri
+    'get reviews - bad request for: ' + uri
   end
 end
 
@@ -19,6 +19,6 @@ def main_function(uri)
     return request_uri.error unless request_uri.valid?
     get_reviews(request_uri.final_uri)
   rescue
-    return 'main function - bad request for: ' + uri
+    'main function - bad request for: ' + uri
   end
 end

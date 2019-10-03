@@ -25,13 +25,13 @@ class ReviewsRequest
 
   def valid?
     return false if @@final_uri_root != @final_uri[0, @@final_uri_root.length]
-    return true
+    true
   end
 
   def reviews_are_valid?
     return false unless @reviews
     return false unless @reviews.is_a? Enumerable
-    return true
+    true
   end
 
   def get_reviews
@@ -61,20 +61,20 @@ class ReviewsRequest
     @reviews.each do |review|
       @formatted_reviews << review.primary_info if review.valid?
     end
-    return @formatted_reviews
+    @formatted_reviews
   end
 
   def results_or_errors
     if reviews_are_valid?
       format_reviews
-      return @formatted_reviews
+      @formatted_reviews
     else
-      return 'no valid reviews for final_uri: ' + @final_uri if @reviews
+      'no valid reviews for final_uri: ' + @final_uri if @reviews
     end
   end
 
   def request_error_message
-    return 'bad request for final_uri: ' + @final_uri
+    'bad request for final_uri: ' + @final_uri
   end
 
 end

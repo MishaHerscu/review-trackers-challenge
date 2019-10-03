@@ -4,7 +4,7 @@ require_relative '../main_function'
 
 # Test review.rb
 def review_tests
-  return [
+  [
     {
       :data => Review.new('test_uri', {}),
       :test_method => 'valid?',
