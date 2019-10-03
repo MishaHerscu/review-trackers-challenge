@@ -1,5 +1,4 @@
 # Sources to test
-require_relative '../../classes/review'
 require_relative '../../main_function'
 
 # Test review.rb
@@ -8,22 +7,28 @@ def api_test_cases
     :label => 'API TESTS',
     :test_cases => [
       {
-        :data => Review.new('test_uri', {}),
-        :test_method => 'valid?',
+        :data => '',
+        :test_method => 'main_function',
         :result => false,
-        :label => 'testing incorrect uri and no hash'
+        :label => 'testing no uri'
       },
       {
-        :data => Review.new('test_uri', { :authorName => 'Mike' }),
-        :test_method => 'valid?',
+        :data => 'incorrect/uri',
+        :test_method => 'main_function',
         :result => false,
-        :label => 'testing incorrect uri with hash'
+        :label => 'testing incorrect uri with string'
       },
       {
-        :data => Review.new('https://www.lendingtree.com/', { :authorName => 'Mike' }),
-        :test_method => 'valid?',
+        :data => 10,
+        :test_method => 'main_function',
+        :result => false,
+        :label => 'testing incorrect uri with number'
+      },
+      {
+        :data => 'https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
+        :test_method => 'main_function',
         :result => true,
-        :label => 'testing correct uri and hash'
+        :label => 'testing correct uri'
       }
     ]
   }
