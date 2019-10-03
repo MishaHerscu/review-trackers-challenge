@@ -5,14 +5,7 @@ require_relative '../../main_function'
 
 def test_server(test)
   uri = URI.parse(test[:uri])
-
-  if test[:data]
-    request_data = {}
-    test[:data].split('&').each do |data|
-      data_key_val = data.split('=')
-      request_data[data_key_val[0]] = data_key_val[1]
-    end
-  end
+  request_data = test[:data] if test[:data]
 
   if test[:http_method] == 'GET'
     begin

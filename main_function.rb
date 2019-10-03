@@ -1,11 +1,11 @@
 require_relative 'classes/request_uri'
 require_relative 'classes/reviews_request'
 
-def get_reviews(uri)
+def request_reviews(uri)
   begin
     request = ReviewsRequest.new(uri)
     return request.request_error_message unless request.valid?
-    request.get_reviews
+    request.request_reviews
     request.results_or_errors
   rescue
     'get reviews - bad request for: ' + uri
@@ -15,9 +15,9 @@ end
 def main_function(uri)
   begin
     request_uri = RequestUri.new(uri)
-    request_uri.get_final_uri
+    request_uri.set_final_uri
     return request_uri.error unless request_uri.valid?
-    get_reviews(request_uri.final_uri)
+    request_reviews(request_uri.final_uri)
   rescue
     'main function - bad request for: ' + uri
   end

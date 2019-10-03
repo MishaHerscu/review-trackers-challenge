@@ -3,7 +3,7 @@ require_relative '../../main_function'
 
 def generate_uri_test_data(input)
   current_request_uri = RequestUri.new(input)
-  current_request_uri.get_final_uri
+  current_request_uri.set_final_uri
   return current_request_uri
 end
 

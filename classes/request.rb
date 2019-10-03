@@ -24,11 +24,11 @@ class Request
     @error_message
   end
 
-  def get_http_method
+  def set_http_method
     @http_method = @request.first.split(' ')[0]
   end
 
-  def get_request_uri
+  def set_request_uri
     @request_uri = @request.last.split('uri=')
   end
 
@@ -49,8 +49,8 @@ class Request
   end
 
   def results
-    get_http_method
-    get_request_uri
+    set_http_method
+    set_request_uri
     if self.valid?
       return main_function(@request_uri[1]).to_s + "\r\n"
     else

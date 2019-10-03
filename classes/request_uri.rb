@@ -28,7 +28,7 @@ class RequestUri
     'bad request: uri must start with "' + @@request_uri_root + '"'
   end
 
-  def get_final_uri
+  def set_final_uri
     begin
       requested_uri = URI.parse(@request_uri)
       document = Net::HTTP.get(requested_uri)

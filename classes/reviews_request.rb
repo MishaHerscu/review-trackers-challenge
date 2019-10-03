@@ -34,7 +34,7 @@ class ReviewsRequest
     true
   end
 
-  def get_reviews
+  def request_reviews
     begin
       final_request_uri = URI.parse(@final_uri)
       document = Net::HTTP.get(final_request_uri)
