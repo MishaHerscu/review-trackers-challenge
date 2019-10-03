@@ -27,7 +27,6 @@ def run_tests(test_cases, section_iter)
   end
 end
 
-
 # Function for running all tests and printing out results
 def run_all_tests
 
