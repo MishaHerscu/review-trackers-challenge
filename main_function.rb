@@ -1,5 +1,5 @@
 require_relative 'reviews_getter'
-require_relative 'request_uri'
+require_relative 'classes/request_uri'
 
 def checks(*args)
   return 'bad request: exactly one arg required"\n"' if args.count != 1

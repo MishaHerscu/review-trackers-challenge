@@ -1,7 +1,7 @@
 require "net/http"
 require "uri"
 require "json"
-require_relative 'review'
+require_relative 'classes/review'
 
 def reviews_getter(arg_uri)
   begin
