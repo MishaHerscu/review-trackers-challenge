@@ -27,6 +27,9 @@ def run_tests(test_section, section_iter)
     if result == test[:result]
       success_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' passed!'
       puts success_string.green
+    elsif result == test[:warning]
+      warning_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:warning]
+      puts warning_string.yellow
     else
       failure_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' failed!'
       puts failure_string.red

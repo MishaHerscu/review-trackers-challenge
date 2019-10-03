@@ -1,7 +1,48 @@
+require 'net/http'
+require 'uri'
+
 require_relative '../../main_function'
 
 def test_server(test)
-  return true
+  uri = URI.parse(test[:uri])
+
+  if test[:http_method] == 'GET'
+    begin
+      request = Net::HTTP::Get.new(uri)
+    rescue
+      return false
+    end
+  elsif test[:http_method] == 'POST'
+    begin
+      request = Net::HTTP::Post.new(uri)
+    rescue
+      return false
+    end
+  elsif test[:http_method] == 'PATCH'
+    begin
+      request = Net::HTTP::Patch.new(uri)
+    rescue
+      return false
+    end
+  elsif test[:http_method] == 'DELETE'
+    begin
+      request = Net::HTTP::Delete.new(uri)
+    rescue
+      return false
+    end
+  else
+    return false
+  end
+
+  begin
+    response = Net::HTTP.start(uri.hostname, uri.port) do |http|
+      http.request(request)
+    end
+  rescue
+    return 'warning: server must be on to use run tests!'
+  end
+
+  return response.body
 end
 
 def server_test_cases
@@ -10,53 +51,60 @@ def server_test_cases
     :type => 'server',
     :test_cases => [
       {
-        :method=> 'POST',
+        :http_method=> 'POST',
         :uri => '',
         :data => nil,
         :result => false,
-        :label => 'testing POST with no uri and no data'
+        :label => 'testing POST with no uri and no data',
+        :warning => 'warning: server must be on to use run tests!'
       },
       {
-        :method=> 'POST',
+        :http_method=> 'POST',
         :uri => 'incorrect/uri',
         :data => 'xyz=123',
         :result => false,
-        :label => 'testing POST with incorrect uri and no data'
+        :label => 'testing POST with incorrect uri and no data',
+        :warning => 'warning: server must be on to use run tests!'
       },
       {
-        :method=> 'POST',
+        :http_method=> 'POST',
         :uri => 'http://localhost:2345/',
         :data => 'xyz=123&uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
         :result => false,
-        :label => 'testing POST with correct uri and too much data'
+        :label => 'testing POST with correct uri and too much data',
+        :warning => 'warning: server must be on to use run tests!'
       },
       {
-        :method=> 'GET',
+        :http_method=> 'GET',
         :uri => 'http://localhost:2345/',
         :data => 'uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
         :result => false,
-        :label => 'testing case with correct uri and data but GET method'
+        :label => 'testing case with correct uri and data but GET method',
+        :warning => 'warning: server must be on to use run tests!'
       },
       {
-        :method=> 'GET',
+        :http_method=> 'PATCH',
         :uri => 'http://localhost:2345/',
         :data => 'uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
         :result => false,
-        :label => 'testing case with correct uri and data but PATCH method'
+        :label => 'testing case with correct uri and data but PATCH method',
+        :warning => 'warning: server must be on to use run tests!'
       },
       {
-        :method=> 'GET',
+        :http_method=> 'DELETE',
         :uri => 'http://localhost:2345/',
         :data => 'uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
         :result => false,
-        :label => 'testing case with correct uri and data but DELETE method'
+        :label => 'testing case with correct uri and data but DELETE method',
+        :warning => 'warning: server must be on to use run tests!'
       },
       {
-        :method=> 'POST',
+        :http_method=> 'POST',
         :uri => 'http://localhost:2345/',
         :data => 'uri=https://www.lendingtree.com/reviews/personal/first-midwest-bank/52903183',
         :result => true,
-        :label => 'testing correct case: correct uri, data, and http method'
+        :label => 'testing correct case: correct uri, data, and http method',
+        :warning => 'warning: server must be on to use run tests!'
       }
     ]
   }
