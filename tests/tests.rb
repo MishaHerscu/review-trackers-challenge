@@ -3,17 +3,34 @@
 # Sources to test
 require 'colorize'
 
-require_relative 'test_cases'
+require_relative 'test_cases/request_uri_test_cases'
+require_relative 'test_cases/review_test_cases'
+require_relative 'test_cases/reviews_request_test_cases'
+require_relative 'test_cases/api_test_cases'
 
-# Run tests and print results
-puts '_____REVIEW OBJECT TESTS_____'
-review_tests.each do |test|
-  test_result = test[:data].send(test[:test_method]) == test[:result]
-  if test_result
-    success_string = test[:label] + ' passed!'
-    puts success_string.green
-  else
-    failure_string = test[:label] + ' failed!'
-    puts failure_string.red
+# function for running tests
+def run_tests(test_cases)
+  puts test_cases[:label]
+  test_cases[:test_cases].each do |test|
+    test_result = test[:data].send(test[:test_method]) == test[:result]
+    if test_result
+      success_string = test[:label] + ' passed!'
+      puts success_string.green
+    else
+      failure_string = test[:label] + ' failed!'
+      puts failure_string.red
+    end
   end
+end
+
+
+test_library = [
+  request_uri_test_cases,
+  review_test_cases,
+  reviews_request_test_cases,
+  api_test_cases
+]
+
+test_library.each do |tests|
+  run_tests(tests)
 end
