@@ -13,7 +13,11 @@ loop do
   request_uri = request.last.split('uri=')[1]
 
   # run code to get reviews data
-  response = main_function(request_uri).to_s + "\r\n"
+  if request.first.split(' ')[0] == 'POST'
+    response = main_function(request_uri).to_s + "\r\n"
+  else
+    response = 'bad request: server only accepts POST requests'
+  end
 
   STDERR.puts request
 
