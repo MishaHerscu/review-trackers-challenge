@@ -9,16 +9,19 @@ require_relative 'test_cases/reviews_request_test_cases'
 require_relative 'test_cases/api_test_cases'
 
 # function for running tests
-def run_tests(test_cases)
-  puts '_____ ' + test_cases[:label] + ' _____'
+def run_tests(test_cases, section_iter)
+  test_iter = 0
+  puts section_iter.to_s + ' _____ ' + test_cases[:label] + ' _____'
+  puts "\n"
   test_cases[:test_cases].each do |test|
+    test_iter += 1
     test_result = test[:data].send(test[:test_method]) == test[:result]
     if test_result
-      success_string = test[:label] + ' passed!'
+      success_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' passed!'
       puts success_string.green
     else
-      failure_string = test[:label] + ' failed!'
-      puts failure_string.red
+      failure_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' failed!'
+      puts iter.to_s + '. ' + failure_string.red
     end
   end
 end
@@ -32,6 +35,11 @@ test_library = [
 ]
 
 # actually run the tests
-test_library.each do |tests|
-  run_tests(tests)
+section_iter = 0
+puts "\n"
+test_library.each do |test_cases|
+  section_iter += 1
+  run_tests(test_cases, section_iter)
+  puts "\n\n"
 end
+puts "\n"
