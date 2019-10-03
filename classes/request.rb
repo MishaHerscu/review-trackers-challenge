@@ -39,7 +39,6 @@ class Request
   def valid?
     return false unless @request_uri
     return true if @http_method == 'POST' && @request_uri.length == 2
-    set_error_message
     false
   end
 
@@ -61,6 +60,7 @@ class Request
     if self.valid?
       return main_function(@request_uri[1]).to_s + "\r\n"
     else
+      set_error_message
       return error_message.to_s + "\r\n"
     end
   end
