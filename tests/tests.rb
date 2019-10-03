@@ -23,7 +23,7 @@ def run_tests(test_cases)
   end
 end
 
-
+# array of imported tests
 test_library = [
   request_uri_test_cases,
   review_test_cases,
@@ -31,6 +31,7 @@ test_library = [
   api_test_cases
 ]
 
+# actually run the tests
 test_library.each do |tests|
   run_tests(tests)
 end
