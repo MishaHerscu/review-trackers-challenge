@@ -12,48 +12,27 @@ require_relative 'test_cases/review_test_cases'
 require_relative 'test_cases/reviews_request_test_cases'
 require_relative 'test_cases/api_test_cases'
 
-# Functions for running through test cases within each section
-def run_class_tests(test_section, section_iter)
-  test_iter = 0
-  puts section_iter.to_s + '. _____ ' + test_section[:label] + ' _____'
-  puts "\n"
-  test_section[:test_cases].each do |test|
-    test_iter += 1
-    test_result = test[:data].send(test[:test_method]) == test[:result]
-    if test_result
-      success_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' passed!'
-      puts success_string.green
-    else
-      failure_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' failed!'
-      puts failure_string.red
-    end
-  end
-end
-
-def run_api_tests(test_section, section_iter)
-  test_iter = 0
-  puts section_iter.to_s + '. _____ ' + test_section[:label] + ' _____'
-  puts "\n"
-  test_section[:test_cases].each do |test|
-    test_iter += 1
-    api_data = main_function(test[:data])
-    potential_review = Review.new(test[:data], api_data[0])
-    test_result = (api_data[0].class == Hash && potential_review.valid?)
-    if test_result == test[:result]
-      success_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' passed!'
-      puts success_string.green
-    else
-      failure_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' failed!'
-      puts failure_string.red
-    end
-  end
-end
-
+# Functions for running through test sections
 def run_tests(test_section, section_iter)
-  if test_section[:type] == 'api'
-    run_api_tests(test_section, section_iter)
-  else test_section[:type] == 'class'
-    run_class_tests(test_section, section_iter)
+  test_iter = 0
+  puts section_iter.to_s + '. _____ ' + test_section[:label] + ' _____'
+  puts "\n"
+  test_section[:test_cases].each do |test|
+    test_iter += 1
+    if test_section[:type] == 'api'
+      api_data = main_function(test[:data])
+      potential_review = Review.new(test[:data], api_data[0])
+      result = api_data[0].class == Hash && potential_review.valid?
+    else
+      result = test[:data].send(test[:test_method])
+    end
+    if result == test[:result]
+      success_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' passed!'
+      puts success_string.green
+    else
+      failure_string = section_iter.to_s + '.' + test_iter.to_s + '. ' + test[:label] + ' failed!'
+      puts failure_string.red
+    end
   end
 end
 
