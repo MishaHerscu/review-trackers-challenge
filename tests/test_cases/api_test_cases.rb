@@ -1,12 +1,3 @@
-require_relative '../../main_function'
-require_relative '../../classes/review'
-
-def test_api(test)
-  api_data = main_function(test[:data])
-  potential_review = Review.new(test[:data], api_data[0])
-  return api_data[0].class == Hash && potential_review.valid?
-end
-
 def api_test_cases
   {
     :label => 'API TESTS',

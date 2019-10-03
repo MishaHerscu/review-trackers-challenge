@@ -1,5 +1,4 @@
 require_relative '../../classes/reviews_request'
-require_relative '../../main_function'
 
 def reviews_request_test_cases
   {

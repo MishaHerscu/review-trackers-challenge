@@ -1,11 +1,4 @@
-require_relative '../../classes/request_uri'
-require_relative '../../main_function'
-
-def generate_uri_test_data(input)
-  current_request_uri = RequestUri.new(input)
-  current_request_uri.set_final_uri
-  return current_request_uri
-end
+require_relative '../testing_helpers'
 
 def request_uri_test_cases
   {

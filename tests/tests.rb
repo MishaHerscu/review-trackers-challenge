@@ -10,6 +10,8 @@ require_relative 'test_cases/reviews_request_test_cases'
 require_relative 'test_cases/api_test_cases'
 require_relative 'test_cases/server_test_cases'
 
+require_relative 'testing_helpers'
+
 # Functions for running through test sections
 def run_tests(test_section, section_iter)
   test_iter = 0
