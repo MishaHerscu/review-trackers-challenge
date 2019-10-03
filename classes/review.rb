@@ -1,6 +1,6 @@
 class Review
 
-  @@uri_beginning = 'https://www.lendingtree.com/'
+  @@request_uri_root = 'https://www.lendingtree.com/'
 
   def initialize(uri, hash)
 
@@ -67,13 +67,11 @@ class Review
     @secondary_info
   end
 
-  def valid
-    return false if @@uri_beginning != @uri[0, @@uri_beginning.length]
+  def valid?
+    p @uri
+    return false if @@request_uri_root != @uri[0, @@request_uri_root.length]
     return false if !@primary_info
     return true
   end
 
-  def display_primary_info
-    p @primary_info
-  end
 end

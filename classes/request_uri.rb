@@ -6,35 +6,37 @@ class RequestUri
   @@request_uri_root = 'https://www.lendingtree.com/'
   @@final_uri_root = 'https://www.lendingtree.com/content/mu-plugins/lt-review-api/review-api-proxy.php?RequestType=&productType=&brandId='
 
-  def initialize(uri)
-    @uri = uri
+  def initialize(request_uri)
+    @request_uri = request_uri
   end
 
-  def uri
-    @uri
-  end
-
-  def valid?
-    return false if @@request_uri_root != @uri[0, @@request_uri_root.length]
-    return true
-  end
-
-  def error_message
-    return 'bad request: uri must start with "' + @@request_uri_root + '"'
-  end
-
-  def display
-    puts @uri
+  def request_uri
+    @request_uri
   end
 
   def final_uri
+    @final_uri
+  end
+
+  def valid?
+    return false if @@request_uri_root != @request_uri[0, @@request_uri_root.length]
+    return false unless self.final_uri
+    return true
+  end
+
+  def error
+    return 'bad request: uri must start with "' + @@request_uri_root + '"'
+  end
+
+  def get_final_uri
     begin
-      request_uri = URI.parse(@uri)
-      document = Net::HTTP.get(request_uri)
+      requested_uri = URI.parse(@request_uri)
+      document = Net::HTTP.get(requested_uri)
       lender_review_id = document.split('data-lenderreviewid')[1].split('"')[1]
-      return @@final_uri_root + lender_review_id
+      @final_uri = @@final_uri_root + lender_review_id
     rescue
-      return 'bad request in uri_getter for: ' + @uri
+      @final_uri = nil
     end
   end
+
 end
